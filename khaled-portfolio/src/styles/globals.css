@@ -1,0 +1,200 @@
+@import './variables.css';
+@import './animations.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Base ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #6366f1 #020209;
+}
+::-webkit-scrollbar       { width: 4px; }
+::-webkit-scrollbar-track { background: #020209; }
+::-webkit-scrollbar-thumb { background: linear-gradient(#6366f1, #8b5cf6); border-radius: 99px; }
+
+body {
+  background-color: var(--clr-bg);
+  color: var(--clr-text-1);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Selection ─────────────────────────────────────── */
+::selection { background: rgba(99, 102, 241, 0.25); color: #e2e8f0; }
+
+/* ─── Utility Classes ───────────────────────────────── */
+.text-gradient {
+  background: linear-gradient(135deg, #818cf8, #a78bfa, #22d3ee);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-anim {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4, #6366f1);
+  background-size: 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-pan 4s ease infinite;
+}
+
+/* ─── Glass Effect ──────────────────────────────────── */
+.glass {
+  background: rgba(8, 8, 26, 0.88);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+.glass-card {
+  background: rgba(10, 10, 28, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  background: rgba(99, 102, 241, 0.07);
+  border-color: rgba(99, 102, 241, 0.3);
+  transform: translateY(-7px);
+  box-shadow: 0 24px 52px rgba(0,0,0,0.35), 0 0 32px rgba(99,102,241,0.1);
+}
+
+/* ─── Neon Border ───────────────────────────────────── */
+.neon-border {
+  border: 1px solid rgba(99, 102, 241, 0.45);
+  box-shadow: 0 0 22px rgba(99, 102, 241, 0.15), inset 0 0 22px rgba(99, 102, 241, 0.04);
+}
+
+/* ─── Section spacing ───────────────────────────────── */
+.section-pad { padding: var(--section-py) 24px; }
+.container   { max-width: var(--container); margin: 0 auto; }
+
+/* ─── Skill Pill ─────────────────────────────────────── */
+.skill-pill {
+  background: rgba(10, 10, 28, 0.95);
+  border: 1px solid rgba(99, 102, 241, 0.14);
+  transition: all 0.26s ease;
+  cursor: default;
+}
+.skill-pill:hover {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.52);
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 10px 28px rgba(99, 102, 241, 0.22);
+}
+
+/* ─── Project Card ──────────────────────────────────── */
+.proj-card {
+  background: rgba(8, 8, 24, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.proj-card:hover {
+  border-color: rgba(99, 102, 241, 0.42);
+  box-shadow: 0 32px 64px rgba(0,0,0,0.45), 0 0 44px rgba(99,102,241,0.12);
+}
+.proj-overlay {
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.proj-card:hover .proj-overlay { opacity: 1; }
+
+/* ─── Custom Cursor ─────────────────────────────────── */
+.cursor-dot,
+.cursor-ring { pointer-events: none; position: fixed; z-index: 99999; border-radius: 50%; }
+.cursor-dot  { width: 6px; height: 6px; background: #6366f1; transform: translate(-50%, -50%); }
+.cursor-ring { width: 36px; height: 36px; border: 1.5px solid rgba(99,102,241,0.5); transform: translate(-50%, -50%); transition: transform 0.15s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease; }
+.cursor-ring.hovering { width: 56px; height: 56px; border-color: rgba(99,102,241,0.85); }
+
+/* ─── Contact Input ─────────────────────────────────── */
+.c-input {
+  background: rgba(5, 5, 18, 0.95);
+  border: 1px solid rgba(99, 102, 241, 0.18);
+  color: #e2e8f0;
+  border-radius: 11px;
+  padding: 13px 17px;
+  width: 100%;
+  font-size: 14px;
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  resize: vertical;
+}
+.c-input:focus {
+  border-color: rgba(99, 102, 241, 0.58);
+  box-shadow: 0 0 18px rgba(99, 102, 241, 0.12);
+}
+.c-input::placeholder { color: rgba(148, 163, 184, 0.3); }
+
+/* ─── Timeline ──────────────────────────────────────── */
+.timeline-line {
+  position: absolute;
+  left: 21px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, #6366f1, #8b5cf6, #06b6d4, transparent);
+  border-radius: 99px;
+}
+
+/* ─── Active Nav dot ────────────────────────────────── */
+.nav-active-dot {
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--clr-primary);
+  box-shadow: 0 0 8px var(--clr-primary);
+}
+
+/* ─── Noise Overlay ─────────────────────────────────── */
+.noise::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* ─── Back to Top ───────────────────────────────────── */
+.back-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #a5b4fc;
+  z-index: 500;
+  transition: all 0.3s ease;
+}
+.back-top:hover {
+  background: rgba(99, 102, 241, 0.22);
+  box-shadow: 0 0 22px rgba(99, 102, 241, 0.28);
+  transform: translateY(-3px);
+}
+
+/* ─── Responsive ────────────────────────────────────── */
+@media (max-width: 768px) {
+  :root { --section-py: 72px; }
+}
