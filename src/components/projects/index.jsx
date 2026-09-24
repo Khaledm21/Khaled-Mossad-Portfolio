@@ -136,9 +136,120 @@ function DashboardMockup({ c }) {
   )
 }
 
+function FitnessMockup({ c }) {
+  return (
+    <svg viewBox="0 0 400 230" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0 w-full h-full">
+      <defs>
+        <linearGradient id="fitgrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor={c} stopOpacity="0.2" />
+          <stop offset="100%" stopColor="#020e0b" stopOpacity="0.95" />
+        </linearGradient>
+      </defs>
+      <rect width="400" height="230" fill="url(#fitgrad)" />
+      {/* Top bar */}
+      <rect width="400" height="30" fill="rgba(0,0,0,0.65)" />
+      <circle cx="20" cy="15" r="7" fill={c} opacity="0.9" />
+      <text x="34" y="19" fill="white" fontSize="11" fontWeight="800" fontFamily="sans-serif">FitPulse</text>
+      <rect x="90" y="9" width="34" height="12" rx="4" fill={`${c}22`} stroke={`${c}55`} strokeWidth="0.5" />
+      <text x="107" y="18" fill={c} fontSize="7" fontWeight="bold" fontFamily="sans-serif" textAnchor="middle">SAAS</text>
+
+      {/* Calories Ring / Macro Card */}
+      <rect x="16" y="44" width="220" height="168" rx="10" fill="rgba(0,0,0,0.45)" stroke="rgba(255,255,255,0.06)" strokeWidth="0.5" />
+      <text x="30" y="66" fill="white" fontSize="10" fontWeight="700" fontFamily="sans-serif">Daily Nutrition</text>
+      <circle cx="70" cy="125" r="38" stroke="rgba(255,255,255,0.08)" strokeWidth="8" fill="none" />
+      <circle cx="70" cy="125" r="38" stroke={c} strokeWidth="8" fill="none" strokeDasharray="238" strokeDashoffset="70" strokeLinecap="round" transform="rotate(-90 70 125)" />
+      <text x="70" y="122" fill="white" fontSize="13" fontWeight="800" fontFamily="sans-serif" textAnchor="middle">1,700</text>
+      <text x="70" y="135" fill="rgba(255,255,255,0.4)" fontSize="7" fontFamily="sans-serif" textAnchor="middle">kcal left</text>
+
+      {/* Macro bars */}
+      <text x="126" y="92" fill="rgba(255,255,255,0.6)" fontSize="7.5" fontFamily="sans-serif">Protein (162/180g)</text>
+      <rect x="126" y="97" width="95" height="5" rx="2.5" fill="rgba(255,255,255,0.08)" />
+      <rect x="126" y="97" width="85" height="5" rx="2.5" fill="#38bdf8" />
+
+      <text x="126" y="122" fill="rgba(255,255,255,0.6)" fontSize="7.5" fontFamily="sans-serif">Carbs (160/220g)</text>
+      <rect x="126" y="127" width="95" height="5" rx="2.5" fill="rgba(255,255,255,0.08)" />
+      <rect x="126" y="127" width="70" height="5" rx="2.5" fill="#f59e0b" />
+
+      <text x="126" y="152" fill="rgba(255,255,255,0.6)" fontSize="7.5" fontFamily="sans-serif">Fats (45/70g)</text>
+      <rect x="126" y="157" width="95" height="5" rx="2.5" fill="rgba(255,255,255,0.08)" />
+      <rect x="126" y="157" width="60" height="5" rx="2.5" fill="#f43f5e" />
+
+      <rect x="30" y="180" width="192" height="20" rx="5" fill={`${c}22`} stroke={`${c}44`} strokeWidth="0.5" />
+      <text x="126" y="193" fill={c} fontSize="8" fontWeight="bold" fontFamily="sans-serif" textAnchor="middle">⚡ AI Coach Advice Active</text>
+
+      {/* Live Gym Mode Card */}
+      <rect x="246" y="44" width="138" height="168" rx="10" fill="rgba(0,0,0,0.45)" stroke="rgba(255,255,255,0.06)" strokeWidth="0.5" />
+      <text x="258" y="66" fill="white" fontSize="10" fontWeight="700" fontFamily="sans-serif">Live Gym Mode</text>
+      <rect x="258" y="78" width="114" height="24" rx="5" fill="rgba(255,255,255,0.04)" />
+      <text x="266" y="93" fill="rgba(255,255,255,0.8)" fontSize="8" fontFamily="sans-serif">Bench Press</text>
+      <text x="358" y="93" fill={c} fontSize="8" fontWeight="bold" fontFamily="sans-serif" textAnchor="end">80kg × 8</text>
+
+      <rect x="258" y="108" width="114" height="24" rx="5" fill="rgba(255,255,255,0.04)" />
+      <text x="266" y="123" fill="rgba(255,255,255,0.8)" fontSize="8" fontFamily="sans-serif">Incline Dumbbell</text>
+      <text x="358" y="123" fill={c} fontSize="8" fontWeight="bold" fontFamily="sans-serif" textAnchor="end">32kg × 10</text>
+
+      {/* Rest Timer */}
+      <rect x="258" y="142" width="114" height="32" rx="6" fill={`${c}1a`} stroke={`${c}33`} strokeWidth="0.5" />
+      <text x="315" y="156" fill="rgba(255,255,255,0.5)" fontSize="6.5" fontFamily="sans-serif" textAnchor="middle">REST TIMER</text>
+      <text x="315" y="169" fill={c} fontSize="11" fontWeight="bold" fontFamily="monospace" textAnchor="middle">01:15</text>
+
+      <rect x="258" y="182" width="114" height="20" rx="5" fill={c} opacity="0.9" />
+      <text x="315" y="195" fill="white" fontSize="8" fontWeight="bold" fontFamily="sans-serif" textAnchor="middle">Complete Set ✓</text>
+    </svg>
+  )
+}
+
+function SportsMockup({ c }) {
+  return (
+    <svg viewBox="0 0 400 230" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0 w-full h-full">
+      <defs>
+        <linearGradient id="spgrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor={c} stopOpacity="0.22" />
+          <stop offset="100%" stopColor="#01140e" stopOpacity="0.95" />
+        </linearGradient>
+      </defs>
+      <rect width="400" height="230" fill="url(#spgrad)" />
+      {/* Top Navbar */}
+      <rect width="400" height="30" fill="rgba(0,0,0,0.7)" />
+      <circle cx="20" cy="15" r="7" fill={c} opacity="0.9" />
+      <text x="34" y="19" fill="white" fontSize="11" fontWeight="800" fontFamily="sans-serif">PlayBook</text>
+      <rect x="94" y="9" width="36" height="12" rx="4" fill={`${c}22`} stroke={`${c}55`} strokeWidth="0.5" />
+      <text x="112" y="18" fill={c} fontSize="7" fontWeight="bold" fontFamily="sans-serif" textAnchor="middle">SAAS</text>
+
+      {/* Stats cards */}
+      {[{ l: 'Preferred City', v: 'Mansoura' }, { l: 'Total Hours', v: '16 hrs' }, { l: 'Matches Played', v: '24' }].map((s, i) => (
+        <g key={i}>
+          <rect x={16 + i * 124} y="42" width="116" height="48" rx="8" fill="rgba(0,0,0,0.5)" stroke="rgba(255,255,255,0.06)" strokeWidth="0.5" />
+          <text x={26 + i * 124} y="58" fill="rgba(255,255,255,0.45)" fontSize="7.5" fontFamily="sans-serif">{s.l}</text>
+          <text x={26 + i * 124} y="76" fill="white" fontSize="13" fontWeight="bold" fontFamily="sans-serif">{s.v}</text>
+        </g>
+      ))}
+
+      {/* Match booking card */}
+      <rect x="16" y="100" width="368" height="114" rx="10" fill="rgba(0,0,0,0.55)" stroke="rgba(255,255,255,0.07)" strokeWidth="0.5" />
+      <rect x="28" y="112" width="68" height="16" rx="4" fill={`${c}22`} />
+      <text x="62" y="123" fill={c} fontSize="7" fontWeight="bold" fontFamily="sans-serif" textAnchor="middle">UPCOMING MATCH</text>
+      <text x="28" y="148" fill="white" fontSize="13" fontWeight="800" fontFamily="sans-serif">Elite Sports Park — Arena 1</text>
+      <text x="28" y="165" fill="rgba(255,255,255,0.5)" fontSize="8" fontFamily="sans-serif">📍 South 90th St, New Cairo • 7v7 Artificial Turf</text>
+      <text x="28" y="180" fill={c} fontSize="8.5" fontWeight="bold" fontFamily="monospace">🕒 09:00 PM – 10:00 PM | E-Ticket Confirmed ✓</text>
+
+      <rect x="256" y="152" width="116" height="28" rx="7" fill={c} opacity="0.92" />
+      <text x="314" y="170" fill="#01140e" fontSize="9" fontWeight="800" fontFamily="sans-serif" textAnchor="middle">Book Slot Now →</text>
+    </svg>
+  )
+}
+
 /* ─── Project Card ───────────────────────────────────── */
 export function ProjectCard({ project, index = 0 }) {
-  const { id, title, subtitle, desc, tech, accent, gradient, category, mockup, image, githubUrl } = project
+  const { id, title, subtitle, desc, description, tech, accent, gradient, category, mockup, image, githubUrl } = project
+  const displayDesc = desc || description
+
+  const saveScroll = () => {
+    try {
+      sessionStorage.setItem('portfolio_return_scroll_' + window.location.pathname, window.scrollY.toString())
+      sessionStorage.setItem('portfolio_last_scroll_' + window.location.pathname, window.scrollY.toString())
+    } catch {}
+  }
 
   return (
     <motion.div
@@ -160,13 +271,15 @@ export function ProjectCard({ project, index = 0 }) {
             {mockup === 'fashion'   && <FashionMockup c={accent} />}
             {mockup === 'ecommerce' && <EcommerceMockup c={accent} />}
             {mockup === 'dashboard' && <DashboardMockup c={accent} />}
+            {mockup === 'fitness'   && <FitnessMockup c={accent} />}
+            {(mockup === 'sports' || mockup === 'playbook') && <SportsMockup c={accent} />}
           </>
         )}
 
         {/* Hover overlay */}
         <div className="proj-overlay absolute inset-0 flex items-center justify-center gap-3"
           style={{ background: 'rgba(4,4,16,0.9)' }}>
-          <Link to={`/projects/${id}`}>
+          <Link to={`/projects/${id}`} onClick={saveScroll}>
             <Button variant="primary" size="sm" rightIcon={<ExternalLink size={13} />}>
               View Details
             </Button>
@@ -192,14 +305,14 @@ export function ProjectCard({ project, index = 0 }) {
       <div className="p-7">
         <div className="flex items-center justify-between mb-3">
           <Badge color={accent}>{category}</Badge>
-          <Link to={`/projects/${id}`} className="text-slate-600 hover:text-slate-300 transition-colors">
+          <Link to={`/projects/${id}`} onClick={saveScroll} className="text-slate-600 hover:text-slate-300 transition-colors">
             <ArrowRight size={16} />
           </Link>
         </div>
 
         <h3 className="font-display font-bold text-[19px] text-slate-100 mb-1.5">{title}</h3>
         <p className="font-mono text-[12px] mb-3" style={{ color: accent }}>{subtitle}</p>
-        <p className="font-body text-slate-500 text-[13.5px] leading-[1.72] mb-5">{desc}</p>
+        <p className="font-body text-slate-500 text-[13.5px] leading-[1.72] mb-5">{displayDesc}</p>
 
         {/* Tech badges */}
         <div className="flex flex-wrap gap-2">

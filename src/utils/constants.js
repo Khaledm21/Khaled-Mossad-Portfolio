@@ -63,7 +63,7 @@ export const CONTACT_INFO = [
   },
 ]
 
-export const PROJECT_CATEGORIES = ['All', 'Fashion', 'E-Commerce', 'Dashboard']
+export const PROJECT_CATEGORIES = ['All', 'SaaS', 'Fashion', 'E-Commerce', 'Dashboard']
 
 export const HERO_TITLES = [
   'Front-End Developer',

@@ -1,8 +1,117 @@
 import dracoImg from '../assets/images/draco.png'
 import freshcartImg from '../assets/images/fresh-card.png'
 import investorServicesImg from '../assets/images/InvestorServices.png'
+import fitnessImg from '../assets/images/Fitness SaaS.png'
+import playbookImg from '../assets/images/play-book.png'
 
 export const projectsData = [
+  {
+    id: 'play-book',
+    title: 'PlayBook',
+    subtitle: 'Sports Venue Booking & Management SaaS',
+    tagline: 'Full-stack cloud ecosystem for sports pitch booking, calendar slot locking & venue management',
+    description:
+      'A comprehensive multi-tenant sports pitch booking and venue management SaaS platform built with React 19, TypeScript, Node.js, Express, and Prisma ORM, featuring deterministic slot-locking and interactive map discovery.',
+    desc:
+      'A comprehensive multi-tenant sports pitch booking and venue management SaaS platform built with React 19, TypeScript, Node.js, Express, and Prisma ORM, featuring deterministic slot-locking and interactive map discovery.',
+    longDescription:
+      'PlayBook is a full-stack cloud ecosystem connecting sports enthusiasts with venue owners across Egypt. The platform features strict Role-Based Access Control (RBAC) with dedicated portals for Players, Venue Owners, and Super Admins. Built with an intelligent concurrency-controlled slot reservation engine that eliminates double bookings, interactive geolocation map search, dynamic peak/off-peak pricing, multi-method payment support (InstaPay, Vodafone Cash, Cash on Venue), SaaS subscription tiers for venue owners, and complete bilingual RTL/LTR internationalization.',
+    category: 'SaaS',
+    type: 'Full-Stack Web App',
+    date: 'Jul 2026',
+    accent: '#00d285',
+    gradient: 'linear-gradient(150deg, #021a12 0%, #010f0a 55%, #03261a 100%)',
+    tech: [
+      'React 19',
+      'TypeScript',
+      'Node.js',
+      'Express',
+      'Prisma ORM',
+      'SQLite',
+      'Tailwind CSS',
+      'React Router v7',
+      'Recharts',
+      'i18next',
+      'JWT Auth',
+    ],
+    features: [
+      'Multi-Role RBAC with dedicated portals for Players, Venue Owners, and Super Admins',
+      'Deterministic slot-locking concurrency control with 10-minute temporary holds to eliminate double bookings',
+      'Interactive map discovery with geolocation & multi-criteria pitch filters',
+      'Comprehensive venue owner dashboard with Recharts revenue analytics & interactive calendar',
+      'Tiered SaaS subscription engine (Basic, Pro, Enterprise) with dynamic venue quota management',
+      'Dynamic pricing engine supporting peak hours, weekend rates, and custom fees',
+      'Multiple payment workflows including Cash on Venue, InstaPay, and mobile wallets',
+      'True bilingual internationalization with seamless RTL (Arabic) and LTR (English) switching',
+    ],
+    challenges: [
+      {
+        challenge: 'Preventing concurrent double-bookings during peak booking windows',
+        solution:
+          'Engineered a deterministic slot-lock algorithm on the database layer with temporary hold timers, guaranteeing zero overlap.',
+      },
+      {
+        challenge: 'Managing complex multi-role state & dynamic pricing models',
+        solution:
+          'Designed modular backend services with Prisma ORM and Express, coupled with typed React Context state and Axios interceptors.',
+      },
+      {
+        challenge: 'Seamless bilingual UX across complex dashboards and calendar pickers',
+        solution:
+          'Integrated i18next with directional RTL/LTR styling in Tailwind CSS, adapting all grids, icons, and schedule layouts.',
+      },
+    ],
+    liveUrl: 'https://play-book-tau.vercel.app/dashboard',
+    githubUrl: 'https://github.com/Khaledm21/PlayBook',
+    mockup: 'sports',
+    image: playbookImg,
+  },
+  {
+    id: 'fitness-saas',
+    title: 'FitPulse',
+    subtitle: 'Fitness & Nutrition SaaS Platform',
+    tagline: 'All-in-one workout tracking, smart nutrition, and AI coaching platform',
+    description:
+      'A modern, feature-rich fitness SaaS web application with comprehensive workout tracking, Mifflin-St Jeor macro counting, interactive Live Gym Mode, and context-aware AI coaching.',
+    desc:
+      'A modern, feature-rich fitness SaaS web application with comprehensive workout tracking, Mifflin-St Jeor macro counting, interactive Live Gym Mode, and context-aware AI coaching.',
+    longDescription:
+      'FitPulse is a comprehensive Software-as-a-Service (SaaS) web application designed to empower athletes and health enthusiasts to reach their fitness goals. The platform features an intelligent onboarding engine using the Mifflin-St Jeor formula for metabolic rate (BMR/TDEE) and macro calculations, an interactive Live Gym Mode with real-time set/rep logging and rest timers, an AI-powered fitness coach, hydration and sleep trackers, and dynamic health visualization using Recharts. Built with React 19, TypeScript, and Tailwind CSS with local persistence and RTL support.',
+    category: 'SaaS',
+    type: 'Web App',
+    date: 'Jun 2026',
+    accent: '#10b981',
+    gradient: 'linear-gradient(150deg, #041d18 0%, #020e0c 55%, #052720 100%)',
+    tech: ['React 19', 'TypeScript', 'Vite', 'Tailwind CSS', 'React Router v7', 'Recharts', 'Context API', 'Lucide Icons'],
+    features: [
+      'Smart 7-step onboarding with Mifflin-St Jeor BMR & TDEE calculation',
+      'Daily calorie & macronutrient tracker with interactive progress ring',
+      'Live Gym Mode with real-time sets/reps logging & rest countdown timer',
+      'Context-aware AI Fitness Coach for tailored nutrition & workout advice',
+      'Comprehensive health monitoring (hydration, sleep stages, steps, weight)',
+      'Interactive historical progress charts & analytics with Recharts',
+      'Modern dark glassmorphic UI with full RTL Arabic support & confetti gamification',
+      'SaaS pricing tiers, subscription models, and authentication workflows',
+    ],
+    challenges: [
+      {
+        challenge: 'Accurate metabolic calculation & dynamic macro distribution',
+        solution: 'Implemented the scientific Mifflin-St Jeor formula in a modular onboarding engine, dynamically calculating BMR/TDEE and goal-based macro splits.',
+      },
+      {
+        challenge: 'Real-time workout state management with zero latency during gym sessions',
+        solution: 'Architected a centralized React Context with LocalStorage persistence, ensuring instantaneous set/rep updates and uninterrupted rest timers.',
+      },
+      {
+        challenge: 'Building a responsive, high-performance RTL dark theme with complex dashboards',
+        solution: 'Utilized Tailwind CSS with custom glassmorphism design tokens and modular Recharts components optimized for mobile and desktop screens.',
+      },
+    ],
+    liveUrl: 'https://fitness-saas-red.vercel.app/',
+    githubUrl: 'https://github.com/Khaledm21/fitness-saas',
+    mockup: 'fitness',
+    image: fitnessImg,
+  },
   {
     id: 'draco',
     title: 'DRACO',

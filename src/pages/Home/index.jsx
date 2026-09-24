@@ -18,9 +18,14 @@ export default function Home() {
   /* Handle navigation from other pages with scrollTo state */
   useEffect(() => {
     if (state?.scrollTo) {
+      const target = state.scrollTo
+      try {
+        window.history.replaceState({}, document.title, window.location.pathname)
+      } catch {}
+
       const timer = setTimeout(() => {
-        scrollToSection(state.scrollTo)
-      }, 300)
+        scrollToSection(target)
+      }, 150)
       return () => clearTimeout(timer)
     }
   }, [state])

@@ -1,7 +1,7 @@
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowLeft, ExternalLink, Github, CheckCircle, Zap, ChevronRight } from 'lucide-react'
-import { FaTshirt, FaShoppingCart, FaChartBar } from 'react-icons/fa'
+import { FaTshirt, FaShoppingCart, FaChartBar, FaDumbbell, FaFutbol } from 'react-icons/fa'
 import { projectsData } from '@data/projectsData'
 import { pageTransition, staggerContainer, fadeUp, fadeLeft, fadeRight } from '@utils/animations'
 import Button from '@components/ui/Button'
@@ -28,15 +28,40 @@ export default function ProjectDetails() {
     )
   }
 
-  const { title, subtitle, tagline, longDescription, tech, accent, gradient, category, features, challenges, liveUrl, githubUrl, image } = project
+  const { title, subtitle, tagline, longDescription, tech, accent, gradient, category, features, challenges, liveUrl, githubUrl, image, bgImage } = project
+  const heroBgImage = bgImage || image
 
   return (
     <motion.div {...pageTransition} className="min-h-screen pt-[90px] pb-24">
 
       {/* ── Hero Banner ── */}
-      <div className="relative overflow-hidden" style={{ height: 420, background: gradient }}>
+      <div className="relative overflow-hidden" style={{ minHeight: 450, background: gradient }}>
+        {/* Background Project Image */}
+        {heroBgImage && (
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            <img
+              src={heroBgImage}
+              alt=""
+              className="w-full h-full object-cover object-top opacity-35 scale-105 filter blur-[1px] transition-transform duration-700"
+            />
+            {/* Dark gradient & vignette overlays to ensure perfect text contrast */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background: `linear-gradient(180deg, rgba(2, 2, 9, 0.72) 0%, rgba(2, 2, 9, 0.45) 45%, rgba(2, 2, 9, 0.9) 85%, #020209 100%)`,
+              }}
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background: `radial-gradient(ellipse at center, ${accent}15 0%, rgba(2, 2, 9, 0.65) 75%)`,
+              }}
+            />
+          </div>
+        )}
+
         {/* Grid overlay */}
-        <div className="absolute inset-0"
+        <div className="absolute inset-0 pointer-events-none"
           style={{
             backgroundImage: 'linear-gradient(rgba(99,102,241,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(99,102,241,0.04) 1px, transparent 1px)',
             backgroundSize: '54px 54px',
@@ -44,12 +69,12 @@ export default function ProjectDetails() {
         />
         {/* Glow orbs */}
         <div className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full pointer-events-none animate-orb-a"
-          style={{ background: `radial-gradient(circle, ${accent}18 0%, transparent 68%)` }} />
+          style={{ background: `radial-gradient(circle, ${accent}20 0%, transparent 68%)` }} />
         <div className="absolute bottom-1/4 right-1/4 w-60 h-60 rounded-full pointer-events-none animate-orb-b"
-          style={{ background: `radial-gradient(circle, ${accent}12 0%, transparent 68%)` }} />
+          style={{ background: `radial-gradient(circle, ${accent}15 0%, transparent 68%)` }} />
 
         {/* Content */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+        <div className="relative z-10 flex flex-col items-center justify-center text-center px-6 py-24">
           <motion.div
             variants={staggerContainer}
             initial="hidden"
@@ -60,23 +85,23 @@ export default function ProjectDetails() {
             </motion.div>
             <motion.h1
               variants={fadeUp}
-              className="font-display font-extrabold mb-3"
+              className="font-display font-extrabold mb-3 drop-shadow-md"
               style={{ fontSize: 'clamp(2.4rem, 6vw, 4.5rem)', letterSpacing: '-0.03em', lineHeight: 1.05 }}
             >
               <span className="text-gradient-anim">{title}</span>
             </motion.h1>
-            <motion.p variants={fadeUp} className="font-mono text-[14px] text-slate-400 mb-2">
+            <motion.p variants={fadeUp} className="font-mono text-[14px] text-slate-300 mb-2 drop-shadow">
               {subtitle}
             </motion.p>
-            <motion.p variants={fadeUp} className="font-body text-slate-500 text-[15px] max-w-[520px] leading-relaxed mx-auto">
+            <motion.p variants={fadeUp} className="font-body text-slate-400 text-[15px] max-w-[540px] leading-relaxed mx-auto drop-shadow">
               {tagline}
             </motion.p>
           </motion.div>
         </div>
 
         {/* Bottom fade */}
-        <div className="absolute bottom-0 left-0 right-0 h-24"
-          style={{ background: 'linear-gradient(to top, #020209, transparent)' }} />
+        <div className="absolute bottom-0 left-0 right-0 h-28 pointer-events-none"
+          style={{ background: 'linear-gradient(to top, #020209 15%, transparent)' }} />
       </div>
 
       {/* ── Body ── */}
@@ -85,7 +110,13 @@ export default function ProjectDetails() {
         {/* Back button */}
         <motion.div variants={fadeUp} initial="hidden" animate="visible" className="mb-8">
           <button
-            onClick={() => navigate(-1)}
+            onClick={() => {
+              if (window.history.state && window.history.state.idx > 0) {
+                navigate(-1)
+              } else {
+                navigate('/projects')
+              }
+            }}
             className="inline-flex items-center gap-2 font-mono text-[12.5px] text-slate-500 hover:text-white transition-colors duration-200 group"
           >
             <ArrowLeft size={15} className="group-hover:-translate-x-1 transition-transform" />
@@ -234,11 +265,19 @@ export default function ProjectDetails() {
               {others.map((p, i) => (
                 <Link key={p.id} to={`/projects/${p.id}`} className="block group">
                   <GlowCard glowColor={p.accent} className="p-6 flex items-center gap-5">
-                    <div className="w-16 h-16 rounded-xl flex-shrink-0 flex items-center justify-center text-[22px]"
+                    <div className="w-16 h-16 rounded-xl flex-shrink-0 flex items-center justify-center text-[22px] overflow-hidden"
                       style={{ background: p.gradient }}>
-                      {p.mockup === 'fashion' && <FaTshirt style={{ color: p.accent }} />}
-                      {p.mockup === 'ecommerce' && <FaShoppingCart style={{ color: p.accent }} />}
-                      {p.mockup === 'dashboard' && <FaChartBar style={{ color: p.accent }} />}
+                      {p.image ? (
+                        <img src={p.image} alt={p.title} className="w-full h-full object-cover" />
+                      ) : (
+                        <>
+                          {p.mockup === 'fashion' && <FaTshirt style={{ color: p.accent }} />}
+                          {p.mockup === 'ecommerce' && <FaShoppingCart style={{ color: p.accent }} />}
+                          {p.mockup === 'dashboard' && <FaChartBar style={{ color: p.accent }} />}
+                          {p.mockup === 'fitness' && <FaDumbbell style={{ color: p.accent }} />}
+                          {p.mockup === 'sports' && <FaFutbol style={{ color: p.accent }} />}
+                        </>
+                      )}
                     </div>
                     <div className="min-w-0">
                       <p className="font-mono text-[10px] mb-1" style={{ color: p.accent }}>{p.category}</p>

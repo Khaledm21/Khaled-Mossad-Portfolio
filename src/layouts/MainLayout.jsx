@@ -6,23 +6,36 @@ import Navbar from '@components/layout/Navbar'
 import Footer from '@components/layout/Footer'
 import MouseGlow from '@components/effects/MouseGlow'
 import ScrollProgress from '@components/effects/ScrollProgress'
-import CustomCursor from '@components/effects/CustomCursor'
 import Loader from '@components/ui/Loader'
 import { scrollToTop } from '@utils/helpers'
 
-// Global state to track if the application has completed its initial load in the SPA lifecycle
-let hasLoadedGlobal = false
+// Check if user has already seen the initial loader in this browser session
+const isFirstVisit = () => {
+  try {
+    return !sessionStorage.getItem('portfolio_visited')
+  } catch {
+    return false
+  }
+}
 
 export default function MainLayout() {
-  const [loading, setLoading] = useState(!hasLoadedGlobal)
+  const [loading, setLoading] = useState(isFirstVisit)
   const [showTop, setShowTop]  = useState(false)
+
+  const handleLoadingComplete = () => {
+    setLoading(false)
+    try {
+      sessionStorage.setItem('portfolio_visited', 'true')
+    } catch {
+      // ignore
+    }
+  }
 
   useEffect(() => {
     if (loading) {
       const t = setTimeout(() => {
-        setLoading(false)
-        hasLoadedGlobal = true
-      }, 2200)
+        handleLoadingComplete()
+      }, 2000)
       return () => clearTimeout(t)
     }
   }, [loading])
@@ -36,12 +49,11 @@ export default function MainLayout() {
   return (
     <>
       <AnimatePresence>
-        {loading && <Loader key="loader" onComplete={() => setLoading(false)} />}
+        {loading && <Loader key="loader" onComplete={handleLoadingComplete} />}
       </AnimatePresence>
 
       {!loading && (
         <div className="relative min-h-screen noise">
-          <CustomCursor />
           <MouseGlow />
           <ScrollProgress />
           <Navbar />

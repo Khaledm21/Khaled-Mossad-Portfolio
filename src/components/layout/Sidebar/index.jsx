@@ -1,18 +1,19 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Github, Linkedin, Mail } from 'lucide-react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { NAV_LINKS, SOCIAL_LINKS } from '@utils/constants'
 import { scrollToSection } from '@utils/helpers'
 
 /* ─── Sidebar (full-screen mobile overlay) ─────────── */
 export default function Sidebar({ open, onClose }) {
   const { pathname } = useLocation()
+  const navigate = useNavigate()
   const isHome = pathname === '/'
 
   const handleLink = (id) => {
     onClose()
     if (!isHome) {
-      window.location.href = `/?scrollTo=${id}`
+      navigate('/', { state: { scrollTo: id } })
     } else {
       setTimeout(() => scrollToSection(id), 80)
     }

@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, Download, ChevronDown, Github, Linkedin, Mail } from 'lucide-react'
+import { ArrowRight, Download, ChevronDown, Github, Linkedin, Mail, Sparkles } from 'lucide-react'
+import { SiReact } from 'react-icons/si'
 import { useTypewriter } from '@hooks/useMouseGlow'
 import { scrollToSection } from '@utils/helpers'
 import { HERO_TITLES, SOCIAL_LINKS } from '@utils/constants'
@@ -123,8 +124,8 @@ export default function Hero() {
                 variant="outline"
                 size="lg"
                 leftIcon={<Download size={17} />}
-                href="/khaled_mossad_CV.pdf"
-                download="khaled_mossad_CV.pdf"
+                href="/khaled_mossad_CV_new.pdf"
+                download="khaled_mossad_CV_new.pdf"
               >
                 Download CV
               </Button>
@@ -169,45 +170,83 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="w-full flex justify-center lg:justify-end items-center"
+            className="w-full flex justify-center lg:justify-end items-center relative py-6"
           >
             {/* Soft Ambient Glows in Cyberpunk Palette */}
-            <div className="absolute -inset-4 rounded-[2.5rem] bg-gradient-to-tr from-primary/10 via-purple-600/10 to-cyan-500/10 opacity-40 blur-3xl pointer-events-none" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] sm:w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-primary/25 via-purple-600/18 to-cyan-400/18 opacity-70 blur-3xl pointer-events-none" />
+            <div className="absolute top-1/3 right-1/4 w-72 h-72 rounded-full bg-cyan-500/15 blur-2xl pointer-events-none" />
             
             {/* The Floating Image Wrapper */}
             <motion.div
-              animate={{ y: [0, -10, 0] }}
+              animate={{ y: [0, -12, 0] }}
               transition={{
                 repeat: Infinity,
                 duration: 6,
                 ease: "easeInOut"
               }}
-              className="relative group w-full max-w-[280px] sm:max-w-[340px] md:max-w-[360px] aspect-[3.2/4] rounded-2xl border border-white/[0.08] bg-white/[0.02] backdrop-blur-md p-3.5 transition-all duration-500 hover:border-primary/30 hover:shadow-[0_0_40px_rgba(99,102,241,0.2)]"
+              className="relative group w-full max-w-[330px] sm:max-w-[400px] md:max-w-[440px] lg:max-w-[470px] aspect-[3/4] rounded-3xl p-2.5 sm:p-3 bg-gradient-to-b from-white/[0.14] via-primary/25 to-white/[0.05] border border-white/[0.12] backdrop-blur-xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.85),0_0_50px_rgba(99,102,241,0.25)] transition-all duration-500 hover:shadow-[0_25px_70px_-10px_rgba(0,0,0,0.95),0_0_65px_rgba(99,102,241,0.38)] hover:border-primary/45"
             >
-              {/* Corner Sci-Fi accents */}
-              <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-primary/40 rounded-tl-lg pointer-events-none" />
-              <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-primary/40 rounded-tr-lg pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-primary/40 rounded-bl-lg pointer-events-none" />
-              <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-primary/40 rounded-br-lg pointer-events-none" />
+              {/* Floating Badge 1 - Top Right: React & Tech */}
+              <motion.div
+                animate={{ y: [0, -6, 0] }}
+                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                className="absolute -top-4 -right-3 sm:-right-5 z-20 flex items-center gap-2.5 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl border border-white/[0.12] bg-[#070716]/95 backdrop-blur-xl shadow-[0_12px_30px_rgba(0,0,0,0.65),0_0_22px_rgba(97,218,251,0.25)]"
+              >
+                <div className="w-8 h-8 rounded-xl bg-[#61dafb]/15 border border-[#61dafb]/35 flex items-center justify-center text-[#61dafb] flex-shrink-0">
+                  <SiReact className="text-[17px] animate-spin-slow" />
+                </div>
+                <div>
+                  <p className="font-mono text-[9.5px] text-slate-400 uppercase tracking-wider leading-none">Specialized</p>
+                  <p className="font-display font-bold text-[12.5px] text-white leading-tight mt-0.5">React.js & TS</p>
+                </div>
+              </motion.div>
+
+              {/* Floating Badge 2 - Bottom Left: Creative Dev & UI */}
+              <motion.div
+                animate={{ y: [0, 6, 0] }}
+                transition={{ repeat: Infinity, duration: 4.8, delay: 0.4, ease: "easeInOut" }}
+                className="absolute -bottom-4 -left-3 sm:-left-5 z-20 flex items-center gap-2.5 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-2xl border border-white/[0.12] bg-[#070716]/95 backdrop-blur-xl shadow-[0_12px_30px_rgba(0,0,0,0.65),0_0_22px_rgba(99,102,241,0.25)]"
+              >
+                <div className="w-8 h-8 rounded-xl bg-primary/15 border border-primary/35 flex items-center justify-center text-primary flex-shrink-0">
+                  <Sparkles size={16} />
+                </div>
+                <div>
+                  <p className="font-mono text-[9.5px] text-slate-400 uppercase tracking-wider leading-none">Experience</p>
+                  <p className="font-display font-bold text-[12.5px] text-white leading-tight mt-0.5">Clean Code & UI</p>
+                </div>
+              </motion.div>
 
               {/* Inner container holding the image */}
-              <div className="relative w-full h-full rounded-xl overflow-hidden bg-gradient-to-b from-slate-900/60 to-slate-950/90 flex items-center justify-center">
-                
-                {/* Micro gradient orbs inside container */}
-                <div className="absolute -bottom-10 -left-10 w-36 h-36 bg-primary/8 rounded-full blur-xl pointer-events-none animate-pulse-ring" />
-                <div className="absolute -top-10 -right-10 w-36 h-36 bg-purple-600/8 rounded-full blur-xl pointer-events-none" />
+              <div className="relative w-full h-full rounded-[20px] overflow-hidden bg-gradient-to-b from-slate-900/90 via-[#070717] to-[#020208] flex items-center justify-center border border-white/[0.06]">
+                {/* Tech corner accents */}
+                <div className="absolute top-2.5 left-2.5 w-3.5 h-3.5 border-t-2 border-l-2 border-primary/60 rounded-tl pointer-events-none z-10" />
+                <div className="absolute top-2.5 right-2.5 w-3.5 h-3.5 border-t-2 border-r-2 border-primary/60 rounded-tr pointer-events-none z-10" />
+                <div className="absolute bottom-2.5 left-2.5 w-3.5 h-3.5 border-b-2 border-l-2 border-primary/60 rounded-bl pointer-events-none z-10" />
+                <div className="absolute bottom-2.5 right-2.5 w-3.5 h-3.5 border-b-2 border-r-2 border-primary/60 rounded-br pointer-events-none z-10" />
+
+                {/* Ambient glow behind image */}
+                <div className="absolute -bottom-8 -left-8 w-44 h-44 bg-primary/14 rounded-full blur-2xl pointer-events-none" />
+                <div className="absolute -top-8 -right-8 w-44 h-44 bg-cyan-400/12 rounded-full blur-2xl pointer-events-none" />
                 
                 {/* The Image */}
                 <img 
                   src={meImage} 
                   alt="Khaled Mossad" 
-                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04] filter brightness-[0.98] contrast-[1.02] group-hover:brightness-100"
+                  className="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03] filter brightness-[1.02] contrast-[1.04]"
                 />
                 
-                {/* Very subtle futuristic overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-transparent pointer-events-none" />
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-10 bg-gradient-to-tr from-primary/10 via-purple-600/10 to-transparent transition-opacity duration-500 pointer-events-none" />
+                {/* Vignette & cinematic bottom overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#020209]/85 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-10 bg-gradient-to-tr from-primary/20 via-purple-600/15 to-transparent transition-opacity duration-500 pointer-events-none" />
+
+                {/* Bottom glass status tag */}
+                <div className="absolute bottom-3 left-3 right-3 z-10 flex items-center justify-between px-3.5 py-2 rounded-xl bg-slate-950/80 border border-white/[0.08] backdrop-blur-md">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="font-mono text-[11px] text-slate-200 font-medium">Khaled Mossad</span>
+                  </div>
+                  <span className="font-mono text-[10px] text-primary font-medium tracking-wide">Front-End Developer</span>
+                </div>
               </div>
             </motion.div>
           </motion.div>

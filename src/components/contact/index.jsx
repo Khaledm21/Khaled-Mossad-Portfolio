@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { MessageSquare, CheckCircle, Send } from 'lucide-react'
+import { MessageSquare, CheckCircle, Send, AlertCircle } from 'lucide-react'
 import SectionTitle from '@components/ui/SectionTitle'
 import GlowCard from '@components/ui/GlowCard'
 import Button from '@components/ui/Button'
@@ -48,13 +48,65 @@ function ContactForm() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
   const [sent, setSent] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
-  const handleSubmit = () => {
+  const handleSubmit = async (e) => {
+    if (e) e.preventDefault()
+    if (loading) return
+
+    const trimmedName = form.name.trim()
+    const trimmedEmail = form.email.trim()
+    const trimmedSubject = form.subject.trim()
+    const trimmedMessage = form.message.trim()
+
+    if (!trimmedName || !trimmedEmail || !trimmedMessage) {
+      setError('Please fill in all required fields marked with *.')
+      return
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(trimmedEmail)) {
+      setError('Please enter a valid email address.')
+      return
+    }
+
     setLoading(true)
-    setTimeout(() => { setLoading(false); setSent(true) }, 1400)
+    setError('')
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: trimmedName,
+          email: trimmedEmail,
+          subject: trimmedSubject,
+          message: trimmedMessage,
+        }),
+      })
+
+      const data = await res.json().catch(() => ({}))
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to send your message. Please try again.')
+      }
+
+      setSent(true)
+      setForm({ name: '', email: '', subject: '', message: '' })
+    } catch (err) {
+      console.error('Contact form error:', err)
+      setError(err.message || 'Something went wrong while sending your message. Please try again later.')
+    } finally {
+      setLoading(false)
+    }
   }
 
-  const set = (key) => (e) => setForm({ ...form, [key]: e.target.value })
+  const set = (key) => (e) => {
+    if (error) setError('')
+    setForm({ ...form, [key]: e.target.value })
+  }
 
   if (sent) {
     return (
@@ -71,14 +123,18 @@ function ContactForm() {
           <CheckCircle size={56} className="text-green-400 mb-5" />
         </motion.div>
         <h3 className="font-display font-bold text-[22px] text-green-400 mb-3">Message Sent!</h3>
-        <p className="font-body text-slate-500 text-[14px] leading-relaxed max-w-[280px]">
-          Thank you for reaching out. I'll get back to you within 24 hours!
+        <p className="font-body text-slate-400 text-[14px] leading-relaxed max-w-[300px]">
+          Thank you for reaching out. I'll get back to you as soon as possible!
         </p>
         <Button
           variant="neon"
           size="sm"
           className="mt-6"
-          onClick={() => { setSent(false); setForm({ name: '', email: '', subject: '', message: '' }) }}
+          onClick={() => {
+            setSent(false)
+            setError('')
+            setForm({ name: '', email: '', subject: '', message: '' })
+          }}
         >
           Send Another
         </Button>
@@ -90,15 +146,27 @@ function ContactForm() {
     <div>
       <h3 className="font-display font-bold text-[20px] text-slate-100 mb-7">Send a Message</h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-        <FloatInput label="Your Name *" value={form.name}    onChange={set('name')} />
-        <FloatInput label="Email Address *" type="email" value={form.email}  onChange={set('email')} />
+        <FloatInput label="Your Name *" value={form.name} onChange={set('name')} />
+        <FloatInput label="Email Address *" type="email" value={form.email} onChange={set('email')} />
       </div>
       <div className="mb-4">
         <FloatInput label="Subject" value={form.subject} onChange={set('subject')} />
       </div>
-      <div className="mb-7">
+      <div className="mb-6">
         <FloatInput label="Your Message *" textarea value={form.message} onChange={set('message')} rows={5} />
       </div>
+
+      {error && (
+        <motion.div
+          initial={{ opacity: 0, y: -6 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-5 p-3.5 rounded-xl border border-rose-500/30 bg-rose-500/10 flex items-start gap-3"
+        >
+          <AlertCircle size={18} className="text-rose-400 flex-shrink-0 mt-0.5" />
+          <p className="font-body text-[13px] text-rose-300 leading-snug">{error}</p>
+        </motion.div>
+      )}
+
       <Button
         variant="primary"
         size="lg"
