@@ -17,4 +17,12 @@ export default defineConfig({
       '@assets': path.resolve(__dirname, './src/assets'),
     },
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://khaled-mossad-portfolio.vercel.app',
+        changeOrigin: true,
+      },
+    },
+  },
 })
