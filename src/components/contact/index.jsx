@@ -10,9 +10,11 @@ import { staggerContainer, fadeUp, fadeLeft, fadeRight } from '@utils/animations
 /* ─── Floating Label Input ─────────────────────────── */
 function FloatInput({ label, type = 'text', value, onChange, textarea = false, rows = 5 }) {
   const [focused, setFocused] = useState(false)
-  const isUp = focused || value.length > 0
+  const isUp = focused || (value && value.length > 0)
+  const inputId = `contact-${label.toLowerCase().replace(/[^a-z0-9]/g, '-')}`
 
   const shared = {
+    id: inputId,
     className: 'c-input',
     value,
     onChange,
@@ -23,18 +25,24 @@ function FloatInput({ label, type = 'text', value, onChange, textarea = false, r
 
   return (
     <div className="relative">
-      {textarea
-        ? <textarea {...shared} rows={rows} style={{ minHeight: 120 }} />
-        : <input {...shared} type={type} />
-      }
+      {textarea ? (
+        <textarea {...shared} rows={rows} style={{ minHeight: 120 }} />
+      ) : (
+        <input {...shared} type={type} />
+      )}
       <label
-        className="absolute left-4 font-body text-[13px] pointer-events-none transition-all duration-200"
+        htmlFor={inputId}
+        className="absolute left-3.5 pointer-events-none transition-all duration-200 select-none z-10"
         style={{
-          top: textarea ? (isUp ? 8 : 16) : (isUp ? 8 : '50%'),
-          transform: isUp ? 'translateY(0) scale(0.85)' : 'translateY(-50%)',
-          transformOrigin: 'left center',
-          color: focused ? '#6366f1' : 'rgba(148,163,184,0.4)',
-          fontSize: isUp ? 11 : 13,
+          top: isUp ? 0 : (textarea ? 16 : '50%'),
+          transform: isUp ? 'translateY(-50%)' : (textarea ? 'none' : 'translateY(-50%)'),
+          color: focused ? '#818cf8' : (value && value.length > 0 ? '#94a3b8' : 'rgba(148,163,184,0.45)'),
+          fontSize: isUp ? 11.5 : 13,
+          fontWeight: isUp ? 500 : 400,
+          background: isUp ? '#070716' : 'transparent',
+          padding: isUp ? '0 6px' : '0',
+          borderRadius: 4,
+          lineHeight: '1.2',
         }}
       >
         {label}
